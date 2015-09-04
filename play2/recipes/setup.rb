@@ -22,7 +22,7 @@ artifact_deploy "play2" do
 
   after_deploy Proc.new {
     link "/usr/bin/play" do
-      to "#{release_path}/typesafe-activator-#{version}/activator"
+      to "#{release_path}/typesafe-activator-#{version}-minimal/activator"
     end
   }
 
