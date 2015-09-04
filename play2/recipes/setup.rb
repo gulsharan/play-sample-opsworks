@@ -12,7 +12,7 @@ version = node[:play2][:version]
 
 artifact_deploy "play2" do
   version node[:play2][:version]
-  artifact_location "#{url}/#{version}/play-#{version}.zip"
+  artifact_location "#{url}/#{version}/typesafe-activator-#{version}-minimal.zip"
 
   deploy_to node[:play2][:deploy_to] || "/opt/play"
   shared_directories []
@@ -22,7 +22,7 @@ artifact_deploy "play2" do
 
   after_deploy Proc.new {
     link "/usr/bin/play" do
-      to "#{release_path}/play-#{version}/play"
+      to "#{release_path}/typesafe-activator-#{version}/activator"
     end
   }
 
