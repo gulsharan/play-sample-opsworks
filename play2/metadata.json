@@ -8,8 +8,8 @@
   "platforms": {
   },
   "dependencies": {
-    "java": "~> 1.14.0",
-    "artifact": "~> 1.10.3"
+    "java": "~> 1.35.0",
+    "artifact": "~> 1.12.2"
   },
   "recommendations": {
   },
