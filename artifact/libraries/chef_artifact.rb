@@ -44,7 +44,7 @@ class Chef
         if windows?
           %Q{copy "#{source}" "#{destination}"}.gsub(::File::SEPARATOR, ::File::ALT_SEPARATOR)
         else
-         "cp -r #{source} #{destination}"
+         "cp -R #{source} #{destination}"
         end
       end
 
@@ -198,6 +198,17 @@ class Chef
       # @return [Boolean] true when version matches (case-insensitive) "latest"
       def latest?(version)
         version.casecmp("latest") == 0
+      end
+
+      # Convenience metho for determining whether a version is a snapshot
+      # version.
+      #
+      # @param version [String] the version of the configured artifact to check
+      #
+      # @return [Boolean] true if the version ends with "-SNAPSHOT" (case
+      # sensitive)
+      def snapshot?(version)
+        version.end_with?("-SNAPSHOT")
       end
 
       # Returns the currently deployed version of an artifact given that artifacts

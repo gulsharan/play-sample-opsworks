@@ -1,3 +1,25 @@
+## v.1.11.3
+
+* [#104](https://github.com/RiotGames/artifact-cookbook/pull/104) Allow ssl_verify to exist in the data bag and be honored
+
+## v.1.11.2
+
+* [#111](https://github.com/RiotGames/artifact-cookbook/pull/111) Fix a bug in artifact_file and installing the aws-sdk gem.
+
+## v.1.11.1
+
+* [#109](https://github.com/RiotGames/artifact-cookbook/pull/109) Artifact file should write a checksum file, similar to remote_file for idempotency.
+* [#108](https://github.com/RiotGames/artifact-cookbook/pull/108) Allow other cookbooks to lock down the windows cookbook dependency.
+
+## v.1.11.0
+
+* [#107](https://github.com/RiotGames/artifact-cookbook/pull/107) Added a new Proc attribute after_download, which executes only after downloading an artifact.
+* [#92](https://github.com/RiotGames/artifact-cookbook/pull/92) Remove some brittle logic for parsing artifact_location and use NexusCli::Artifact.
+
+## v.1.10.3
+
+* Kyle released the plugin with his Mac when tar was using bsdtar.
+
 ## v.1.10.2
 
 * [#105](https://github.com/RiotGames/artifact-cookbook/pull/105) Fixed an edge case due to skip_manifest_check and actually writing the manifest file.

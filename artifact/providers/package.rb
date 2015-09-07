@@ -36,7 +36,7 @@ def load_current_resource
   else
     sha = Digest::SHA1.hexdigest new_resource.location
     @extension = new_resource.location.match(/[:\.]([0-9a-z]+)$/i)[1]
-    @file_name = "#{new_resource.name}-#{sha}.#{ext}"
+    @file_name = "#{new_resource.name}-#{sha}.#{@extension}"
   end
   @current_resource = Chef::Resource::ArtifactPackage.new(@new_resource.name)
   @current_resource
@@ -60,6 +60,7 @@ action :install do
     group new_resource.group
     nexus_configuration nexus_configuration_object if Chef::Artifact.from_nexus?(new_resource.location)
     download_retries new_resource.download_retries
+    after_download new_resource.after_download
   end
 
   package new_resource.name do

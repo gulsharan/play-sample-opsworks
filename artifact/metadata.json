@@ -13,7 +13,7 @@
     "windows": ">= 6.0"
   },
   "dependencies": {
-    "windows": "~> 1.8.0"
+    "windows": ">= 0.0.0"
   },
   "recommendations": {
   },
@@ -31,5 +31,5 @@
   },
   "recipes": {
   },
-  "version": "1.10.3"
+  "version": "1.12.2"
 }

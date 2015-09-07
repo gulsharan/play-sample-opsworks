@@ -61,6 +61,7 @@ migrate                    | A proc containing resources to be executed during t
 after_migrate              | A proc containing resources to be executed after the migration Proc                  | Proc    |
 restart                    | A proc containing resources to be executed at the end of a successful deploy         | Proc    |
 after_deploy               | A proc containing resources to be executed after the deploy process ends             | Proc    |
+after_download             | A proc containing resources to be executed only if the artifact has been downloaded  | Proc    |
 remove_top_level_directory | Deletes a top level directory from the extracted zip file                            | Boolean | false
 skip_manifest_check        | Skips the manifest check for idempotency when the version attribute is not changing  | Boolean | false
 remove_on_force            | Removes the current version directory contents when force is set                     | Boolean | false
@@ -132,6 +133,7 @@ location               | The location to the artifact file. Either a nexus ident
 checksum               | The SHA256 checksum for verifying URL downloads. Not used when location is Nexus     | String  |
 owner                  | Owner of the downloaded file                                                         | String  |
 group                  | Group of the downloaded file                                                         | String  |
+after_download         | A proc containing resources to be executed only if the artifact has been downloaded  | Proc    |
 download_retries       | The number of times to attempt to download the file if it fails its integrity check  | Integer | 1
 
 ### Downloading files using artifact_file
@@ -168,6 +170,7 @@ location               | The location to the artifact file. Either a nexus ident
 checksum               | The SHA256 checksum for verifying URL downloads. Not used when location is Nexus     | String  |
 owner                  | Owner of the downloaded file                                                         | String  |
 group                  | Group of the downloaded file                                                         | String  |
+after_download         | A proc containing resources to be executed only if the artifact has been downloaded  | Proc    |
 download_retries       | The number of times to attempt to download the file if it fails its integrity check  | Integer | 1
 
 
@@ -228,7 +231,7 @@ separate data_bag items:
 To further customize your Nexus usage, you can use the new `nexus_configuration` attribute. To do so, create a new `Chef::Artifact::NexusConfiguration` object, passing it
 the customized parameters - url, repository, username (defaults to nil), password (defaults to nil), ssl_verify (defaults to true). Then pass that object to the `artifact_deploy` resource. For example:
 
-    nexus_configuration_object = Chef::Artifact::NexusConfiguration("http://nexus-url", "snapshots", "username", "password")
+    nexus_configuration_object = Chef::Artifact::NexusConfiguration.new("http://nexus-url", "snapshots", "username", "password")
 
     artifact_deploy "my-artifact" do
       version             "latest"
@@ -471,28 +474,12 @@ Your data_bag can contain both ```nexus``` and ```aws``` configuration.
       action :install
     end
 
-# Testing
-
-A sample cookbook is available in `fixtures`. You can package it with mkartifact.sh, and
-upload it to Nexus as artifact_cookbook:test:1.2.3:tgz.
-
-Set the artifact_test_location and artifact_test_version environment variables when running
-vagrant to change how they'll be provisioned. Default is 1.2.3 from a file URL.
-
-* artifact_test_location=artifact_cookbook:test:1.2.3:tgz artifact_test_version=1.2.3 bundle exec vagrant
-
 # Releasing
 
-1. Install the prerequisite gems
+Use [stove](https://github.com/sethvargo/stove)
 
-        $ gem install chef
-        $ gem install thor
-
-2. Increment the version number in the metadata.rb file
-
-3. Run the Thor release task to create a tag and push to the community site
-
-        $ thor release
+1. Edit your `~/.stove`
+2. `bake ${VERSION}`
 
 # License and Author
 
