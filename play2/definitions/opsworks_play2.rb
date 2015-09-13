@@ -146,6 +146,6 @@ define :opsworks_play2 do
 
     execute "restart #{application}" do
       user "root"
-      command "sudo service #{application} restart"
+      command "sudo -E service #{application} restart"
     end
 end
