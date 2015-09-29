@@ -75,8 +75,8 @@ define :opsworks_play2 do
 
       # restart_command "echo whoami && sudo service #{application} restart"
       before_restart do
-        # Create the application configuration file
-        template ::File.join(app_dir, "conf/application.conf") do
+        # Create the vars configuration file
+        template ::File.join(app_dir, "conf/vars.conf") do
           source "app_conf.erb"
           cookbook "play2"
           owner deploy[:user]
@@ -146,6 +146,6 @@ define :opsworks_play2 do
 
     execute "restart #{application}" do
       user "root"
-      command "sudo -E service #{application} restart"
+      command "sudo service #{application} restart"
     end
 end
